@@ -26,10 +26,11 @@ O primeiro dígito do CPF é 7
 
 
 while True:
-  cpf = input('Insira um cpf(apenas números): ')
+  cpf = input('Insira um cpf: ').replace('.', '') \
+  .replace('-', '')
 
-  if len(cpf) != 11:
-    print('O cpf deve conter 11 dígitos.')
+  if cpf == cpf[0] * len(cpf):
+    print('Digite um cpf válido.')
     continue
 
   else:
@@ -46,7 +47,7 @@ while True:
     for numero in cpf[:9]:
       soma_resultados += int(numero) * i
       i -= 1
-
+    
     verif = (soma_resultados * 10) 
     resto = verif % 11
 
@@ -54,12 +55,6 @@ while True:
       resultado = 0
 
     else:
-      resultado = verif
+      resultado = resto
     
-    print(f'O resultado é {resultado}, e o primeiro dígito do cpf é {cpf[0]}')
-  
-  saída = input('Deseja [s]air ou inserir outro cpf?(para sair pressione qualquer outra tecla)')
-  if saída.startswith('s'):
-    break
-  else:
-    continue
+    print(f'O primeiro dígito é {resultado}')
